@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pobierz plik</title>
 
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
     <style>
@@ -34,6 +33,29 @@
             background: #4752c4;
             transform: scale(1.05);
         }
+
+        #nexil-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 50vw;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 15px;
+
+            opacity: 0;
+            visibility: hidden;
+            transform: translate(-50%, -50%) scale(0.8);
+
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            z-index: 9999;
+        }
+
+        #nexil-popup.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
     </style>
 </head>
 
@@ -42,6 +64,22 @@
     <a class="download-btn" href="nexil.jpg" download="nexil.jpg">
         Pobierz
     </a>
+
+    <img id="nexil-popup" src="nexil.jpg" alt="Nexil">
+
+    <script>
+        const popup = document.getElementById("nexil-popup");
+
+        function showImage() {
+            popup.classList.add("show");
+
+            setTimeout(() => {
+                popup.classList.remove("show");
+            }, 1000);
+        }
+
+        setInterval(showImage, 5000);
+    </script>
 
 </body>
 </html>
