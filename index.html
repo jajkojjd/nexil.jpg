@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pobierz plik</title>
 
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="./ikona/favicon.ico">
 
     <style>
         body {
@@ -42,11 +42,9 @@
             max-height: 80vh;
             object-fit: contain;
             border-radius: 15px;
-
             opacity: 0;
             visibility: hidden;
             transform: translate(-50%, -50%) scale(0.8);
-
             transition: opacity 0.2s ease, transform 0.2s ease;
             z-index: 9999;
         }
@@ -56,29 +54,61 @@
             visibility: visible;
             transform: translate(-50%, -50%) scale(1);
         }
+
+        #blocked {
+            display: none;
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
 <body>
 
-    <a class="download-btn" href="nexil.jpg" download="nexil.jpg">
-        Pobierz
-    </a>
+    <div id="blocked">
+        Dostęp zablokowany.
+    </div>
 
-    <img id="nexil-popup" src="nexil.jpg" alt="Nexil">
+    <div id="content">
+        <a class="download-btn" href="nexil.jpg" download="nexil.jpg">
+            Pobierz
+        </a>
+
+        <img id="nexil-popup" src="nexil.jpg" alt="Nexil">
+    </div>
 
     <script>
-        const popup = document.getElementById("nexil-popup");
+        const blockedIP = "37.248.216.61";
 
-        function showImage() {
-            popup.classList.add("show");
+        fetch("https://api.ipify.org?format=json")
+            .then(response => response.json())
+            .then(data => {
+                if (data.ip === blockedIP) {
+                    document.getElementById("content").style.display = "none";
+                    document.getElementById("blocked").style.display = "block";
+                } else {
+                    startPopup();
+                }
+            })
+            .catch(() => {
+                startPopup();
+            });
 
-            setTimeout(() => {
-                popup.classList.remove("show");
-            }, 1000);
+        function startPopup() {
+            const popup = document.getElementById("nexil-popup");
+
+            function showImage() {
+                popup.classList.add("show");
+
+                setTimeout(() => {
+                    popup.classList.remove("show");
+                }, 1000);
+            }
+
+            setInterval(showImage, 5000);
         }
-
-        setInterval(showImage, 5000);
     </script>
 
 </body>
