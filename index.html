@@ -26,12 +26,18 @@
             border-radius: 10px;
             font-size: 18px;
             font-weight: bold;
-            transition: 0.2s;
         }
 
-        .download-btn:hover {
-            background: #4752c4;
-            transform: scale(1.05);
+        #blocked {
+            display: none;
+            color: white;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        #content {
+            text-align: center;
         }
 
         #nexil-popup {
@@ -54,29 +60,21 @@
             visibility: visible;
             transform: translate(-50%, -50%) scale(1);
         }
-
-        #blocked {
-            display: none;
-            color: white;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
     </style>
 </head>
 
 <body>
 
-    <div id="blocked">
-        Dostęp zablokowany.
-    </div>
-
     <div id="content">
-        <a class="download-btn" href="nexil.jpg" download="nexil.jpg">
+        <a class="download-btn" href="./nexil.jpg" download="nexil.jpg">
             Pobierz
         </a>
 
-        <img id="nexil-popup" src="nexil.jpg" alt="Nexil">
+        <img id="nexil-popup" src="./nexil.jpg" alt="Nexil">
+    </div>
+
+    <div id="blocked">
+        Nie można wejść
     </div>
 
     <script>
